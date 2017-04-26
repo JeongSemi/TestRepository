@@ -31,4 +31,24 @@ public class HomeController {
     public String cssExam03() {
         return "css/exam03"; //리턴값.jsp가 실행된다
     }
+    
+    @RequestMapping("/javascript/exam01")
+    public String javascriptExam01() {
+        return "javascript/exam01"; //리턴값.jsp가 실행된다
+    }
+    
+    @RequestMapping("/javascript/exam02")
+    public String javascriptExam02() {
+        return "javascript/exam02"; //리턴값.jsp가 실행된다
+    }
+    
+    @RequestMapping("/javascript/exam03")
+    public String javascriptExam03() {
+        return "javascript/exam03"; //리턴값.jsp가 실행된다
+    }
+    
+    @RequestMapping("/javascript/exam04")
+    public String javascriptExam04() {
+        return "javascript/exam04"; //리턴값.jsp가 실행된다
+    }
 }
