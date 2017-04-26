@@ -21,4 +21,9 @@ public class HomeController {
     public String cssExam01() {
         return "css/exam01"; //리턴되는 값-> .jsp와 밀접한 관련
     }
+    
+    @RequestMapping("/css/exam02")
+    public String cssExam02() {
+        return "css/exam02"; //리턴값.jsp가 실행된다
+    }
 }
