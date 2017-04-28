@@ -5,7 +5,6 @@
 <%@page ... %> : JSP가 무엇을 만들어내는가
 <%@include ... %> 
 <%@taglib ... %>
-
 --%>
 <%--contentType의 charset-> 웹 브라우저(클라이언트)로 보낼 때의 charset 
 / 페이지인코딩->파일 저장할 때의 charset -> 생략되어있을 경우 contentType의 charset을 따라간다--%>
