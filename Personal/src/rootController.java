@@ -25,6 +25,8 @@ public class rootController implements Initializable {
     private ImageView lightBulbImage;
     @FXML
     private Button btnLight;
+    @FXML
+    private ImageView livingroomImage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -32,7 +34,7 @@ public class rootController implements Initializable {
     }
 
     private void handleBtnLight(ActionEvent e) {
-        planImage.setImage(new Image(getClass().getResource("투명평면도(주방on).png").toString()));
+        livingroomImage.setOpacity(0);
         lightBulbImage.setImage(new Image(getClass().getResource("lightbulb(bright).png").toString()));
     }
 
