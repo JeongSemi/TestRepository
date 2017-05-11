@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -181,9 +183,38 @@ public class CallController implements Initializable {
             Parent parent = FXMLLoader.load(getClass().getResource("CallWarningDialog.fxml"));
 
             Button dialogBtnClose = (Button) parent.lookup("#dialogBtnClose");
+            ImageView imageWarning = (ImageView) parent.lookup("#imageWarning");
+            imageWarning.setImage(new Image(getClass().getResource("images/attention.png").toString()));
+            task = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    
+                    while (true) {
+                        Platform.runLater(() -> {
+                            imageWarning.setOpacity(0);
+                        });
+                        Thread.sleep(400);
+                        Platform.runLater(() -> {
+                            imageWarning.setOpacity(1);
+                        });
+                        if (isCancelled()) {
+                            break;
+                        }
+                    }
+                    return null;
+                }
 
+                @Override
+                protected void cancelled() {
+                    dialog.close();
+                }
+            };
+
+            Thread thread = new Thread(task);
+            thread.setDaemon(true);
+            thread.start();
             dialogBtnClose.setOnAction(e -> {
-                dialog.close();
+                task.cancel();
             });
 
             Scene scene = new Scene(parent);
