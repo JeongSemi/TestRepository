@@ -52,7 +52,7 @@
 
         <h3>팝업</h3>
         <button class="btn btn-warning" onclick="handleBtn1()">팝업 열기</button>
-        <button class="btn btn-warning" onclick="handleBtn1()">팝업 열기</button>
+        <button class="btn btn-warning" onclick="handleBtn2()">팝업 닫기</button>
 
         <h3>주기적 실행</h3>
         <button class="btn btn-warning" onclick="handleBtn3()">시작</button>

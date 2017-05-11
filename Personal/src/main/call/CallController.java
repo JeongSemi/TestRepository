@@ -212,36 +212,20 @@ public class CallController implements Initializable {
         task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                int i = 0;
-
                 while (true) {
-                    if (i % 4 == 0) {
+                    Platform.runLater(() -> {
+                        lblCalling.setText("호출중");
+                    });
+                    Thread.sleep(400);
+                    for (int i = 0; i < 4; i++) {
                         Platform.runLater(() -> {
-                            lblCalling.setText("호출중");
+                            lblCalling.setText(lblCalling.getText() + ".");
                         });
-                    } else if (i % 4 == 1) {
-                        Platform.runLater(() -> {
-                            lblCalling.setText("호출중.");
-                        });
-                    } else if (i % 4 == 2) {
-                        Platform.runLater(() -> {
-                            lblCalling.setText("호출중..");
-                        });
-                    } else {
-                        Platform.runLater(() -> {
-                            lblCalling.setText("호출중...");
-                        });
+                        Thread.sleep(400);
                     }
-
                     if (isCancelled()) {
                         break;
                     }
-                    try {
-                        Thread.sleep(500);
-                    } catch (Exception e) {
-                        break;
-                    }
-                    i++;
                 }
                 return null;
             }
