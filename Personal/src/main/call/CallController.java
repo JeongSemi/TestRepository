@@ -1,4 +1,4 @@
-package main.call;
+package smarthomepanel.call;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -69,6 +68,7 @@ public class CallController implements Initializable {
     private AnchorPane callControl;
 
     private Task<Void> task;
+    private boolean stop = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -79,7 +79,8 @@ public class CallController implements Initializable {
             @Override
             public void run() {
                 SimpleDateFormat sdf = new SimpleDateFormat("a hh:mm");
-                while (true) {
+                while (!stop) {
+                    System.out.println("시간스레드 작동");
                     String strTime = sdf.format(new Date());
                     Platform.runLater(() -> {
                         lblTime.setText(strTime);
@@ -91,7 +92,6 @@ public class CallController implements Initializable {
                 }
             }
         };
-        thread.setDaemon(true);
         thread.start();
 
     }
@@ -184,24 +184,27 @@ public class CallController implements Initializable {
 
             Button dialogBtnClose = (Button) parent.lookup("#dialogBtnClose");
             ImageView imageWarning = (ImageView) parent.lookup("#imageWarning");
-            imageWarning.setImage(new Image(getClass().getResource("images/attention.png").toString()));
+
             task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    
                     while (true) {
-                        Platform.runLater(() -> {
-                            imageWarning.setOpacity(0);
-                        });
-                        Thread.sleep(400);
-                        Platform.runLater(() -> {
-                            imageWarning.setOpacity(1);
-                        });
-                        if (isCancelled()) {
-                            break;
+                        for (int i = 0; i < 2; i++) {
+                            if (i == 0) {
+                                Platform.runLater(() -> {
+                                    imageWarning.setOpacity(0);
+                                });
+                            } else {
+                                Platform.runLater(() -> {
+                                    imageWarning.setOpacity(1);
+                                });
+                            }
+                            try {
+                                Thread.sleep(400);
+                            } catch (InterruptedException ex) {
+                            }
                         }
                     }
-                    return null;
                 }
 
                 @Override
@@ -213,6 +216,7 @@ public class CallController implements Initializable {
             Thread thread = new Thread(task);
             thread.setDaemon(true);
             thread.start();
+
             dialogBtnClose.setOnAction(e -> {
                 task.cancel();
             });
@@ -228,6 +232,7 @@ public class CallController implements Initializable {
         }
 
     }
+    
 
     private void showCallDialog() throws IOException {
         Stage dialog = new Stage(StageStyle.TRANSPARENT);
@@ -293,11 +298,43 @@ public class CallController implements Initializable {
 
         Button dialogBtnClose = (Button) parent.lookup("#dialogBtnClose");
         Label lblOffice = (Label) parent.lookup("#lblOffice");
+        Label lblCalling = (Label) parent.lookup("#lblCalling");
 
         lblOffice.setText("관리실");
 
+        task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while (true) {
+                    Platform.runLater(() -> {
+                        lblCalling.setText("호출중");
+                    });
+                    Thread.sleep(400);
+                    for (int i = 0; i < 4; i++) {
+                        Platform.runLater(() -> {
+                            lblCalling.setText(lblCalling.getText() + ".");
+                        });
+                        Thread.sleep(400);
+                    }
+                    if (isCancelled()) {
+                        break;
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void cancelled() {
+                dialog.close();
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+
         dialogBtnClose.setOnAction(e -> {
-            dialog.close();
+            task.cancel();
         });
 
         Scene scene = new Scene(parent);
@@ -317,11 +354,43 @@ public class CallController implements Initializable {
 
         Button dialogBtnClose = (Button) parent.lookup("#dialogBtnClose");
         Label lblOffice = (Label) parent.lookup("#lblOffice");
+        Label lblCalling = (Label) parent.lookup("#lblCalling");
 
         lblOffice.setText("경비실");
 
+        task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while (true) {
+                    Platform.runLater(() -> {
+                        lblCalling.setText("호출중");
+                    });
+                    Thread.sleep(400);
+                    for (int i = 0; i < 4; i++) {
+                        Platform.runLater(() -> {
+                            lblCalling.setText(lblCalling.getText() + ".");
+                        });
+                        Thread.sleep(400);
+                    }
+                    if (isCancelled()) {
+                        break;
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void cancelled() {
+                dialog.close();
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+
         dialogBtnClose.setOnAction(e -> {
-            dialog.close();
+            task.cancel();
         });
 
         Scene scene = new Scene(parent);
@@ -346,5 +415,13 @@ public class CallController implements Initializable {
         Timeline timeLine = new Timeline();
         timeLine.getKeyFrames().add(keyFrame);
         timeLine.play();
+        stop = true;
+        System.gc();
+    }
+    
+      @FXML
+    private void handleBtnRefresh(ActionEvent event){
+        txtDong.setText("");
+        txtHo.setText("");
     }
 }

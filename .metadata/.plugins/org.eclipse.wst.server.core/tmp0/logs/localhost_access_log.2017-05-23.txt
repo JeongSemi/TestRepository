@@ -1,0 +1,16 @@
+127.0.0.1 - - [23/May/2017:01:18:29 +0900] "GET / HTTP/1.1" 404 994
+127.0.0.1 - - [23/May/2017:01:19:47 +0900] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:19:49 +0900] "GET /SpringWebProgramming3/WEB-INF/spring/applicationContext.xml HTTP/1.1" 404 992
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:20:11 +0900] "GET /SpringWebProgramming/ HTTP/1.1" 200 4137
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:20:12 +0900] "GET /SpringWebProgramming/resources/bootstrap-3.3.7/css/bootstrap.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:20:12 +0900] "GET /SpringWebProgramming/resources/bootstrap-3.3.7/js/bootstrap.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:20:12 +0900] "GET /SpringWebProgramming/resources/jquery/jquery-3.2.1.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:20:13 +0900] "GET /SpringWebProgramming/file/exam03 HTTP/1.1" 200 620888
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:28:33 +0900] "GET /SpringWebProgramming3/ HTTP/1.1" 404 992
+127.0.0.1 - - [23/May/2017:01:30:21 +0900] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:30:38 +0900] "GET /SpringWebProgramming3/ HTTP/1.1" 200 4140
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:30:38 +0900] "GET /SpringWebProgramming3/resources/bootstrap-3.3.7/css/bootstrap.min.css HTTP/1.1" 200 121205
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:30:38 +0900] "GET /SpringWebProgramming3/resources/jquery/jquery-3.2.1.min.js HTTP/1.1" 200 86663
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:30:39 +0900] "GET /SpringWebProgramming3/resources/bootstrap-3.3.7/js/bootstrap.min.js HTTP/1.1" 200 37051
+0:0:0:0:0:0:0:1 - - [23/May/2017:01:30:39 +0900] "GET /SpringWebProgramming3/file/exam03 HTTP/1.1" 500 -
+127.0.0.1 - - [23/May/2017:01:49:12 +0900] "GET / HTTP/1.1" 404 994

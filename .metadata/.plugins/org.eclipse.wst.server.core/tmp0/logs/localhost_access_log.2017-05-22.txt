@@ -1,0 +1,6 @@
+127.0.0.1 - - [22/May/2017:23:53:29 +0900] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [22/May/2017:23:55:02 +0900] "GET /SpringWebProgramming/ HTTP/1.1" 200 4137
+0:0:0:0:0:0:0:1 - - [22/May/2017:23:55:02 +0900] "GET /SpringWebProgramming/resources/jquery/jquery-3.2.1.min.js HTTP/1.1" 200 86663
+0:0:0:0:0:0:0:1 - - [22/May/2017:23:55:02 +0900] "GET /SpringWebProgramming/resources/bootstrap-3.3.7/css/bootstrap.min.css HTTP/1.1" 200 121205
+0:0:0:0:0:0:0:1 - - [22/May/2017:23:55:02 +0900] "GET /SpringWebProgramming/resources/bootstrap-3.3.7/js/bootstrap.min.js HTTP/1.1" 200 37051
+0:0:0:0:0:0:0:1 - - [22/May/2017:23:55:03 +0900] "GET /SpringWebProgramming/file/exam03 HTTP/1.1" 200 620888
