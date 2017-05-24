@@ -34,7 +34,7 @@
 	<!-- <bean id="exam10Service4" class="com.mycompany.myapp.service.Exam10Service4Impl" 
 		p:exam10Dao-ref="exam10Dao2" /> -->
 	<bean id="exam10Service4" class="com.mycompany.myapp.service.Exam10Service4Impl">
-		<property name="exam10Dao" ref="exam10Dao2" /> <!-- name = setter이름 -->
+		<property name="exam10Dao" ref="exam10Dao2" /> <!-- name => setter이름 -->
 	</bean>
 
 	<!-- 생성자 주입 -->

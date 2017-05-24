@@ -37,14 +37,14 @@ public class DualColorLed {
         redPin.low();
     }
 
-//    public static void main(String[] args) throws InterruptedException {
-//        DualColorLed test = new DualColorLed(RaspiPin.GPIO_22, RaspiPin.GPIO_21);
-//        while(true){
-//            test.green();
-//            Thread.sleep(3000);
-//            test.red();
-//            Thread.sleep(1000);
-//        }
-//    }
+    public static void main(String[] args) throws InterruptedException {
+        DualColorLed test = new DualColorLed(RaspiPin.GPIO_22, RaspiPin.GPIO_21);
+        while(true){
+            test.green();
+            Thread.sleep(3000);
+            test.red();
+            Thread.sleep(1000);
+        }
+    }
 
 }
