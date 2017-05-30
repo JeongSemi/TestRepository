@@ -18,10 +18,14 @@
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/UTF-8</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
 	<!-- DispatcherServlet 등록 및 URL 매핑 / 요청을 처리하는 역할 -->

@@ -1,7 +1,7 @@
 package com.mycompany.myapp.controller;
 
-import com.mycompany.myapp.dto.Board;
-import com.mycompany.myapp.dto.Member;
+import com.mycompany.myapp.dto.Exam07Board;
+import com.mycompany.myapp.dto.Exam07Member;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,16 +32,16 @@ public class Exam07JspController {
     @RequestMapping("/exam04")
     public String JspExam04(HttpServletRequest request) {
         request.setAttribute("name2", "홍길동");
-        request.setAttribute("member2", new Member("홍길동", 30));
+        request.setAttribute("member2", new Exam07Member("홍길동", 30));
         return "jsp/exam04";
     }
 
     @RequestMapping("/exam05")
     public String JspExam05(Model model) {
         model.addAttribute("name3", "홍길동"); // 키, 값
-        model.addAttribute("member3", new Member("홍길동", 30));
+        model.addAttribute("member3", new Exam07Member("홍길동", 30));
 
-        Board board = new Board();
+        Exam07Board board = new Exam07Board();
         board.setBno(1);
         board.setBtitle("오늘은 휴가 전날");
         board.setBcontent("휴가 때 과제할 내용을 준비해야합니다.");
@@ -50,9 +50,9 @@ public class Exam07JspController {
 
         model.addAttribute("board", board);
 
-        List<Board> list = new ArrayList<Board>();
+        List<Exam07Board> list = new ArrayList<Exam07Board>();
         for (int i = 1; i <= 10; i++) {
-            Board b = new Board();
+            Exam07Board b = new Exam07Board();
             b.setBno(i);
             b.setBtitle("제목" + i);
             b.setBcontent("내용입니다. 장비가 와야할텐데T_T " + i);
