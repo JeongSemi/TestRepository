@@ -5,12 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.mycompany.myapp.dto.Exam07Board;
 import com.mycompany.myapp.dto.Exam12Board;
 import com.mycompany.myapp.dto.Exam12Member;
 
@@ -19,7 +21,7 @@ public class Exam12DaoImpl implements Exam12Dao {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Exam12DaoImpl.class);
 
 	@Override
-	public int insert1(Exam12Board board) {
+	public int boardInsert(Exam12Board board) {
 		int bno = -1;
 		Connection conn = null;
 		try {
@@ -72,7 +74,136 @@ public class Exam12DaoImpl implements Exam12Dao {
 	}
 
 	@Override
-	public String insert2(Exam12Member member) {
+	public List<Exam12Board> boardSelectAll() {
+		List<Exam12Board> list = new ArrayList<>();
+		Connection conn = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			conn = DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+
+			String sql = "select bno, btitle, bwriter, bdate, bhitcount ";
+			sql += "from board ";
+			sql += "order by bno desc";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery(); // 수정X, DB의 상태를 변경시켜라
+			while (rs.next()) {
+				Exam12Board board = new Exam12Board();
+				board.setBno(rs.getInt("bno"));
+				board.setBtitle(rs.getString("btitle"));
+				board.setBwriter(rs.getString(3));
+				board.setBdate(rs.getDate("bdate"));
+				board.setBhitcount(rs.getInt("bhitcount"));
+				list.add(board);
+			}
+			rs.close();
+			pstmt.close();
+			LOGGER.info("SELECT 성공");
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<Exam12Board> boardSelectPage(int pageNo, int rowsPerPage) {
+		List<Exam12Board> list = new ArrayList<>();
+		Connection conn = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			conn = DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+
+			String sql = "select * ";
+			sql += "from ( ";
+			sql += "  select rownum as r, bno, btitle, bwriter, bdate, bhitcount ";
+			sql += "  from ( ";
+			sql += "  select bno, btitle, bwriter, bdate, bhitcount from board order by bno desc ";
+			sql += "  ) ";
+			sql += "  where rownum<=? ";
+			sql += ") ";
+			sql += "where r>=? ";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pageNo * rowsPerPage);
+			pstmt.setInt(2, (pageNo - 1) * rowsPerPage + 1);
+			ResultSet rs = pstmt.executeQuery(); // 수정X, DB의 상태를 변경시켜라
+			while (rs.next()) {
+				Exam12Board board = new Exam12Board();
+				board.setBno(rs.getInt("bno"));
+				board.setBtitle(rs.getString("btitle"));
+				board.setBwriter(rs.getString(3));
+				board.setBdate(rs.getDate("bdate"));
+				board.setBhitcount(rs.getInt("bhitcount"));
+				list.add(board);
+			}
+			rs.close();
+			pstmt.close();
+			LOGGER.info("SELECT 성공");
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public int boardCountAll() {
+		int count = 0;
+		Connection conn = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			conn = DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+
+			String sql = "select count(*) from board";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery(); // 수정X, DB의 상태를 변경시켜라
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			pstmt.close();
+			LOGGER.info("SELECT 성공");
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return count;
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public String memberInsert(Exam12Member member) {
 		String mid = null;
 		Connection conn = null;
 
@@ -99,7 +230,7 @@ public class Exam12DaoImpl implements Exam12Dao {
 			pstmt.setString(9, member.getMsavedfilename());
 			pstmt.setString(10, member.getMfilecontent());
 			pstmt.executeUpdate(); // 수정X, DB의 상태를 변경시켜라
-			//리턴값 설정(primary key)
+			// 리턴값 설정(primary key)
 			mid = member.getMid();
 			pstmt.close();
 			LOGGER.info("행 추가 성공");
@@ -116,18 +247,163 @@ public class Exam12DaoImpl implements Exam12Dao {
 		return mid;
 	}
 
+	@Override
+	public List<Exam12Member> memberSelectAll() {
+
+		List<Exam12Member> list = new ArrayList<>();
+		Connection conn = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			conn = DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+
+			String sql = "select mid, mname, mtel, memail, mage, maddress ";
+			sql += "from member ";
+			sql += "order by mid asc";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Exam12Member member = new Exam12Member();
+				member.setMid(rs.getString("mid"));
+				member.setMname(rs.getString("mname"));
+				member.setMdate(rs.getDate("mdate"));
+				member.setMtel(rs.getString("mtel"));
+				member.setMemail(rs.getString("memail"));
+				member.setMage(rs.getInt("mage"));
+				member.setMaddress(rs.getString("maddress"));
+				list.add(member);
+			}
+			rs.close();
+			pstmt.close();
+			LOGGER.info("SELECT 성공");
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<Exam12Member> memberSelectPage(int pageNo, int rowsPerPage) {
+		List<Exam12Member> list = new ArrayList<>();
+		Connection conn = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			conn = DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+
+			String sql = "select * ";
+			sql += "from ( ";
+			sql += "  select rownum as r, mid, mname, mdate, mtel, memail, mage, maddress ";
+			sql += "  from ( ";
+			sql += "  select mid, mname, mdate, mtel, memail, mage, maddress from member order by mid asc ";
+			sql += "  ) ";
+			sql += "  where rownum<=? ";
+			sql += ") ";
+			sql += "where r>=? ";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pageNo * rowsPerPage);
+			pstmt.setInt(2, (pageNo - 1) * rowsPerPage + 1);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Exam12Member member = new Exam12Member();
+				member.setMid(rs.getString("mid"));
+				member.setMname(rs.getString("mname"));
+				member.setMdate(rs.getDate("mdate"));
+				member.setMtel(rs.getString("mtel"));
+				member.setMemail(rs.getString("memail"));
+				member.setMage(rs.getInt("mage"));
+				member.setMaddress(rs.getString("maddress"));
+				list.add(member);
+			}
+			rs.close();
+			pstmt.close();
+			LOGGER.info("SELECT 성공");
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public int memberCountAll() {
+		int count = 0;
+		Connection conn = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			conn = DriverManager.getConnection(url, "iotuser", "iot12345");
+			LOGGER.info("연결 성공");
+
+			String sql = "select count(*) from member";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery(); // 수정X, DB의 상태를 변경시켜라
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			pstmt.close();
+			LOGGER.info("SELECT 성공");
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return count;
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public static void main(String[] args) {
 		Exam12DaoImpl test = new Exam12DaoImpl();
-		Exam12Board board = new Exam12Board();
-		board.setBtitle("제목");
-		board.setBcontent("내용");
-		board.setBwriter("홍길동");
-		board.setBpassword("iot12345");
-		board.setBoriginalfilename("a.png");
-		board.setBsavedfilename("a.png");
-		board.setBfilecontent("image/png");
-		int bno = test.insert1(board);
-		LOGGER.info("추가된 행의 bno : " + bno);
+		// List<Exam12Board> list = test.boardSelectPage(2, 10);
+		// for (Exam12Board board : list) {
+		// LOGGER.info(board.getBtitle());
+		// }
+		// List<Exam12Member> list = new ArrayList<>();
+		for (int i = 1; i <= 100; i++) {
+			Exam12Member member = new Exam12Member();
+			member.setMid("아이디"+i);
+			member.setMname("이름" + i);
+			member.setMpassword("iot12345");
+			member.setMtel("010-1234-5678");
+			member.setMemail("이메일@이메일");
+			member.setMage(i);
+			member.setMaddress("주소");
+			member.setMoriginalfilename("aaa.png");
+			member.setMsavedfilename(new Date().getTime() + "-aaa.png");
+			member.setMfilecontent("image/png");
+
+			test.memberInsert(member);
+		}
+
 	}
 
 }
