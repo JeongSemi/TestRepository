@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset=UTF-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <title>JSP Page</title>
         <link href="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
             <c:forEach var="m" items="${list}"> 
                 <tr>
                     <td>${m.mid}</td>
-                    <td>${m.mname}</td>
+                    <td><a href="exam06Detail?mid=${m.mid }">${m.mname}</a></td>
                     <td>${m.mtel}</td>
                     <td>${m.memail}</td>
                     <td>${m.mage}</td>
