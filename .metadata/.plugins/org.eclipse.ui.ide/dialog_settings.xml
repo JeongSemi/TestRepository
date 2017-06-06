@@ -3,4 +3,6 @@
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
 		<item value="C:\Users\USER\Desktop\IoT\Java\GitRepository\TestRepository\SpringWebProgramming"/>
 	</list>
+	<section name="NewWizardAction">
+	</section>
 </section>

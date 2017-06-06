@@ -181,7 +181,7 @@ public class Exam12JdbcController {
 		return "redirect:/jdbc/exam05Detail?bno=" + board.getBno();
 	}
 
-	@RequestMapping("jdbc/exam05Delete")
+	@RequestMapping("/jdbc/exam05Delete")
 	public String exam05Delete(int bno) {
 		service.boardDelete(bno);
 		return "redirect:/jdbc/exam05";

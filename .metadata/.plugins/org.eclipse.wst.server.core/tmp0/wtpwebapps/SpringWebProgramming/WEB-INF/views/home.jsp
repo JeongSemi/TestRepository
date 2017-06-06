@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%><!DOCTYPE html>
 <html>
     <head>
-        <meta charset=UTF-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <title>Home</title>
         <link href="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -76,6 +76,17 @@
         <h4>의존성 주입</h4>
         <a href= "di/exam01" class="btn btn-info">회원 가입</a>
         <a href= "di/exam02" class="btn btn-info">로그인</a>
-
+        
+        <h4>Redirect(재요청)</h4>
+        <a href="redirect/list" class="btn btn-primary">게시물 목록</a>
+		<a href="redirect/write" class="btn btn-primary">게시물 쓰기</a>
+		
+		<h4>JDBC</h4>
+		<a href="jdbc/exam01" class="btn btn-default">게시물 쓰기</a>
+		<a href="jdbc/exam02" class="btn btn-default">게시물 쓰기</a>
+		<a href="jdbc/exam03" class="btn btn-default">회원 가입</a>
+		<a href="jdbc/exam04" class="btn btn-default">게시물 목록</a>
+		<a href="jdbc/exam05" class="btn btn-default">게시물 페이지 목록</a>
+		<a href="jdbc/exam06" class="btn btn-default">회원 목록</a>
     </body>
 </html>

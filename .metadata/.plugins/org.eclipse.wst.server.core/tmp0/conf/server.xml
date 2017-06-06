@@ -124,7 +124,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\Users\USER\Desktop\IoT\Java\GitRepository\TestRepository\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\USER\Desktop\IoT\Java\GitRepository\TestRepository\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\SpringWebProgramming" path="/SpringWebProgramming" reloadable="true" source="org.eclipse.jst.jee.server:SpringWebProgramming"/><Context docBase="C:\Users\USER\Desktop\IoT\Java\GitRepository\TestRepository\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\SpringWebProgramming3" path="/SpringWebProgramming3" reloadable="true" source="org.eclipse.jst.jee.server:SpringWebProgramming3"/></Host>
+      <Context docBase="C:\Users\USER\Desktop\IoT\Java\GitRepository\TestRepository\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\USER\Desktop\IoT\Java\GitRepository\TestRepository\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\SpringWebProgramming" path="/SpringWebProgramming" reloadable="true" source="org.eclipse.jst.jee.server:SpringWebProgramming"/><Context docBase="C:\Users\USER\Desktop\IoT\Java\GitRepository\TestRepository\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\PhotoBoard" path="/PhotoBoard" reloadable="true" source="org.eclipse.jst.jee.server:PhotoBoard"/></Host>
     </Engine>
   </Service>
 </Server>
