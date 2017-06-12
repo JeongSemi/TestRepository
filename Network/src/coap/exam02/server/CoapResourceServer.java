@@ -1,28 +1,34 @@
-package coap.exam01.server;
+package coap.exam02.server;
 
+import coap.exam01.server.*;
 import java.net.InetSocketAddress;
 import org.eclipse.californium.core.CoapServer;
 import org.eclipse.californium.core.network.CoapEndpoint;
 
 public class CoapResourceServer {
+
     //Field
     private CoapServer coapServer;
+
     //Constructor
-    public CoapResourceServer(){
+    public CoapResourceServer() throws Exception {
         coapServer = new CoapServer();
         InetSocketAddress isa = new InetSocketAddress("192.168.3.30", 5683);
         coapServer.addEndpoint(new CoapEndpoint(isa));
+
         coapServer.add(new CoapResource01());
+        coapServer.add(new CoapResource02());
+
         coapServer.start();
     }
-    
+
     //Method
-    public void shutdown(){
+    public void shutdown() {
         coapServer.stop();
         coapServer.destroy();
     }
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws Exception {
         //서버 구동
         CoapResourceServer server = new CoapResourceServer();
         System.out.println("CoAP server is listening on port 5683");
