@@ -14,7 +14,7 @@ public class CoapResource01Client {
         coapClient = new CoapClient();
     }
 
-    //Method
+    //Method Git
     public String get() {
         coapClient.setURI("coap://192.168.3.30:5683/resource01");
         CoapResponse response = coapClient.get();
