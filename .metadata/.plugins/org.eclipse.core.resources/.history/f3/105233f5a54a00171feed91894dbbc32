@@ -1,7 +1,0 @@
-package com.mycompany.myapp.dao;
-
-import com.mycompany.myapp.dto.PhotoBoard;
-
-public interface PhotoBoardDao {
-	public int boardWrite(PhotoBoard board);
-}

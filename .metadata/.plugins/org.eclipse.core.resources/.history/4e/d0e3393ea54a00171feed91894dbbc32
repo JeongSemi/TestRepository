@@ -1,7 +1,0 @@
-package com.mycompany.myapp.service;
-
-import com.mycompany.myapp.dto.PhotoBoard;
-
-public interface PhotoBoardService {
-	public void boardWrite(PhotoBoard board);
-}
