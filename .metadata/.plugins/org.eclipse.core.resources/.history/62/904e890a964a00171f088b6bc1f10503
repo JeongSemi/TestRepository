@@ -1,0 +1,11 @@
+package com.mycompany.myapp.service;
+
+import com.mycompany.myapp.dto.PhotoBoard;
+
+public class PhotoBoardServiceImpl implements PhotoBoardService {
+	@Override
+	public void boardWrite(PhotoBoard board) {
+		// TODO Auto-generated method stub
+
+	}
+}

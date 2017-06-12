@@ -1,0 +1,71 @@
+package com.mycompany.myapp.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import com.mycompany.myapp.dto.PhotoBoard;
+
+@Component
+public class PhotoBoardDaoImpl implements PhotoBoardDao {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(PhotoBoardDaoImpl.class);
+
+	@Override
+	public int boardWrite(PhotoBoard board) {
+		int bno = -1;
+		Connection conn = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+
+			String url = "jdbc:oracle:thin:@117.17.198.43:1531:orcl";
+			conn = DriverManager.getConnection(url, "djsuser", "iot12345");
+			LOGGER.info("연결 성공");
+
+			String sql = "insert into photoboard ";
+			sql += "(bno, boriginalfilename, bsavedfilename, bfilecontent, btitle, bwriter, bpassword, bdate, bcontent, bhitcount) ";
+			sql += "values ";
+			sql += "(board_bno_seq.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, 0) ";
+
+			PreparedStatement pstmt = conn.prepareStatement(sql, new String[] { "bno" });
+			pstmt.setString(1, board.getBoriginalfilename());
+			pstmt.setString(2, board.getBsavedfilename());
+			pstmt.setString(3, board.getBfilecontent());
+			pstmt.setString(4, board.getBtitle());
+			pstmt.setString(5, board.getBwriter());
+			pstmt.setString(6, board.getBpassword());
+			pstmt.setString(7, board.getBcontent());
+
+			pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys();
+			rs.next();
+			bno = rs.getInt(1);
+			//rs.close();
+			pstmt.close();
+			LOGGER.info("행 추가 성공");
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 연결 끊기
+			try {
+				conn.close();
+				LOGGER.info("연결 끊김");
+			} catch (SQLException e) {
+			}
+		}
+
+		return bno;
+	}
+
+	public static void main(String[] args) {
+
+	}
+}

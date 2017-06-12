@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox>
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/lionking.png" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin></ImageView>
+            <VBox prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" text="제목: 라이온킹">
+                     <font>
+                        <Font name="Malgun Gothic Bold" size="17.0" />
+                     </font></Label>
+                  <Label maxWidth="1.7976931348623157E308" text="내용: 숙부 무파사에게 아버지와 왕위를 잃은 어린 사자 심바(Simba)의 모험담을 다룬 작품" wrapText="true">
+                     <font>
+                        <Font name="Malgun Gothic" size="13.0" />
+                     </font></Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding></VBox>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/aladdin.jpg" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" text="제목: 알라딘">
+                     <font>
+                        <Font name="Malgun Gothic Bold" size="17.0" />
+                     </font></Label>
+                  <Label maxWidth="1.7976931348623157E308" text="내용:">
+                     <font>
+                        <Font name="Malgun Gothic" size="13.0" />
+                     </font></Label>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/wicked.jpg" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" text="제목: 위키드">
+                     <font>
+                        <Font name="Malgun Gothic Bold" size="17.0" />
+                     </font></Label>
+                  <Label maxWidth="1.7976931348623157E308" text="내용:">
+                     <font>
+                        <Font name="Malgun Gothic" size="13.0" />
+                     </font></Label>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
