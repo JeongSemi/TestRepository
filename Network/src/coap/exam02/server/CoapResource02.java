@@ -4,8 +4,6 @@ import com.pi4j.io.gpio.RaspiPin;
 import hardware.motor.PCA9685;
 import hardware.motor.SG90ServoPCA9685Duration;
 import hardware.sensor.UltrasonicSensor;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.server.resources.CoapExchange;
 import org.json.JSONObject;

@@ -51,10 +51,6 @@
 	 	select * from board where bno=#{bno}
 	 </select>
 	 
-	 <update id="updateBhitcount" parameterType="map">
-	 	update board set bhitcount=#{bhitcount} where bno=#{bno}
-	 </update>
-	 
 	 <update id="update" parameterType="com.mycompany.myapp.dto.Exam12Board">
 	 	<if test="boriginalfilename != null">
 	 		update board set btitle=#{btitle}, bcontent=#{bcontent}, bpassword=#{bpassword}, bdate=sysdate, boriginalfilename=#{boriginalfilename}, bsavedfilename=#{bsavedfilename}, bfilecontent=#{bfilecontent} where bno=#{bno}
@@ -63,5 +59,9 @@
 	 		 update board set btitle=#{btitle}, bcontent=#{bcontent}, bpassword=#{bpassword}, bdate=sysdate where bno=#{bno}
 	 	</if>
 	 </update>
+	 
+	 <delete id="delete" parameterType="int">
+	 	delete from board where bno=#{bno}
+	 </delete>
 	 
 </mapper>
