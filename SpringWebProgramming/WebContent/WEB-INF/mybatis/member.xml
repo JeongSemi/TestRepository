@@ -28,7 +28,7 @@
 	 	select count(*) from member
 	 </select>
 	 
-	 <select id="selectByMid" parameterType="String" resultType="com.mycompany.myapp.dto.Exam12Member">
+	 <select id="selectByMid" parameterType="string" resultType="com.mycompany.myapp.dto.Exam12Member">
 	 	select * from member where mid=#{mid}
 	 </select>
 	 
@@ -41,7 +41,7 @@
 	 	</if>
 	 </update>
 	 
-	 <delete id="delete" parameterType="String">
+	 <delete id="delete" parameterType="string">
 	 	delete from member where mid=#{mid}
 	 </delete>
 	 
