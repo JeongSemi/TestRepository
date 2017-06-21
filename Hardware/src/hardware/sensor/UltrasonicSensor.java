@@ -28,7 +28,7 @@ public class UltrasonicSensor {
     }
 
     //Method
-    public int getDistance() {
+    public int getDistance() { 
         //초음파 송신 시간 변수와 수신 시간 변수 선언
         double start = 0;
         double end = 0;
