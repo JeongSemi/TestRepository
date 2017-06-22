@@ -1,6 +1,10 @@
 package sensingcar.coap.server.resource;
 
 import hardware.lcd.LCD1602;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.server.resources.CoapExchange;
 import org.json.JSONObject;
@@ -19,7 +23,7 @@ public class LcdResource extends CoapResource {
     public LcdResource() throws Exception {
         super("lcd");
         lcd = new LCD1602(0x27);
-        setText("RPi-5-2", "192.168.3.30");
+        setText("RPi-5-2", getIPaddress());
     }
 
     //Method
@@ -29,6 +33,25 @@ public class LcdResource extends CoapResource {
         lcd.write(1, 0, line1);
         currLine0 = line0;
         currLine1 = line1;
+    }
+    
+    public String getIPaddress() throws Exception {
+        String wlan0 = "";
+        Enumeration<NetworkInterface> niEnum = NetworkInterface.getNetworkInterfaces();
+        while (niEnum.hasMoreElements()) {
+            NetworkInterface ni = niEnum.nextElement();
+            String displayName = ni.getDisplayName();
+            if (displayName.equals("wlan0")) {
+                Enumeration<InetAddress> iaEnum = ni.getInetAddresses();
+                while (iaEnum.hasMoreElements()) {
+                    InetAddress ia = iaEnum.nextElement();
+                    if (ia instanceof Inet4Address) {
+                        wlan0 = ia.getHostAddress();
+                    }
+                }
+            }
+        }
+        return wlan0;
     }
 
     @Override

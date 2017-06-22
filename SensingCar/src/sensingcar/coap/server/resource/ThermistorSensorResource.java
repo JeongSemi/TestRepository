@@ -29,7 +29,6 @@ public class ThermistorSensorResource extends CoapResource {
         Thread thread = new Thread() {
             @Override
             public void run() {
-                int count = 1;
                 while (true) {
                     try {
                         currTemperature = thermistorSensor.getValue();
