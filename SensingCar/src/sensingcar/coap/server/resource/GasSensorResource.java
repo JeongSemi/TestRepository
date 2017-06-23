@@ -1,9 +1,6 @@
 package sensingcar.coap.server.resource;
 
-import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
-import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
-import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import hardware.converter.PCF8591;
 import hardware.sensor.GasSensor;
 import org.eclipse.californium.core.CoapResource;

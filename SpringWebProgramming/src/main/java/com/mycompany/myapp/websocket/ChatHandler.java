@@ -3,8 +3,6 @@ package com.mycompany.myapp.websocket;
 import java.util.List;
 import java.util.Vector;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

@@ -86,6 +86,23 @@ public class HomeController {
 		resJsonObject = new JSONObject(resJson);
 		model.addAttribute("lcdline0", resJsonObject.getString("line0"));
 		model.addAttribute("lcdline1", resJsonObject.getString("line1"));
+
+		// -----------------------------------------------------------------------
+		coapClient.setURI("coap://192.168.3.30/fronttire");
+		coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		resJson = coapResponse.getResponseText();
+
+		resJsonObject = new JSONObject(resJson);
+		model.addAttribute("fronttireAngle", resJsonObject.getString("angle"));
+
+		// -----------------------------------------------------------------------
+		coapClient.setURI("coap://192.168.3.30/backtire");
+		coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		resJson = coapResponse.getResponseText();
+
+		resJsonObject = new JSONObject(resJson);
+		model.addAttribute("direction", resJsonObject.getString("direction"));
+		model.addAttribute("speed", resJsonObject.getString("speed"));
 		// -----------------------------------------------------------------------
 		coapClient.shutdown();
 		return "controlpanel";
@@ -195,7 +212,7 @@ public class HomeController {
 		pw.flush();
 		pw.close();
 	}
-	
+
 	@RequestMapping("/lcd")
 	public void lcd(String command, String line0, String line1, HttpServletResponse response) throws IOException {
 		JSONObject jsonObject = new JSONObject();
@@ -208,6 +225,48 @@ public class HomeController {
 		coapClient.setURI("coap://192.168.3.30/lcd");
 		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
 		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}
+
+	@RequestMapping("/fronttire")
+	public void fronttire(String command, String angle, HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("angle", angle);
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://192.168.3.30/fronttire");
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		coapClient.shutdown();
+
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter pw = response.getWriter();
+		pw.write(resJson);
+		pw.flush();
+		pw.close();
+	}
+	
+	@RequestMapping("/backtire")
+	public void backtire(String command, String direction, String speed, HttpServletResponse response) throws IOException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("direction", direction);
+		jsonObject.put("speed", speed);
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://192.168.3.30/backtire");
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+		String resJson = coapResponse.getResponseText();
+		logger.info(resJson);
 		coapClient.shutdown();
 
 		response.setContentType("application/json; charset=UTF-8");

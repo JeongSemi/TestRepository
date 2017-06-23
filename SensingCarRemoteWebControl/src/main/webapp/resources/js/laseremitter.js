@@ -1,6 +1,6 @@
 function laseremitter(command, status){
 	var json = {
-			"command" : "change",
+			"command" : command,
 			"status" : status
 		};
 	

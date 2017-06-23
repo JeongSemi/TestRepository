@@ -1,6 +1,6 @@
 function buzzer(command, status){
 	var json = {
-			"command" : "change",
+			"command" : command,
 			"status" : status
 		};
 	

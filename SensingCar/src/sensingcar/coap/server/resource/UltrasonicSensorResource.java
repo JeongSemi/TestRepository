@@ -18,7 +18,7 @@ public class UltrasonicSensorResource extends CoapResource {
     private PCA9685 pca9685;
     private SG90ServoPCA9685Duration servoMotor;
     private UltrasonicSensor ultrasonicSensor;
-    private final int minAngle = 10;
+    private final int minAngle = 20;
     private final int maxAngle = 170;
     private int currAngle;
     private int currDistance;

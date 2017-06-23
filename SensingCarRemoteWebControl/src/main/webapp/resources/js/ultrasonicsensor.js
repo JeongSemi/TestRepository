@@ -1,6 +1,6 @@
 function ultrasonicsensor(command, angle) {
 	var json = {
-		"command" : "change",
+		"command" : command,
 		"angle" : angle
 	};
 

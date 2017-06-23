@@ -61,15 +61,15 @@ public class DCMotor {
         
         motorA.forward();
         motorB.forward();
-        motorA.setSpeed(1000);
-        motorB.setSpeed(1000);
+        motorA.setSpeed(4095);
+        motorB.setSpeed(4095);
         
         Thread.sleep(1000);
         
         motorA.backward();
         motorB.backward();
-        motorA.setSpeed(1000);
-        motorB.setSpeed(1000);
+        motorA.setSpeed(4095);
+        motorB.setSpeed(4095);
         Thread.sleep(1000);
         motorA.stop();
         motorB.stop();
