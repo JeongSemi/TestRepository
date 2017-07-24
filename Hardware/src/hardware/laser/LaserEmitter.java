@@ -6,10 +6,6 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
 
-/**
- *
- * @author blueskii
- */
 public class LaserEmitter {
     private GpioPinDigitalOutput laserPin;
     private String status = "off";
