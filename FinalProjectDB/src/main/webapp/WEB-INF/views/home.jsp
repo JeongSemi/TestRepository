@@ -13,6 +13,9 @@
     <body>
         WebApplication Home
         <hr/>
-   
+   		
+   		<h4>센서 데이터값 저장</h4>
+   		<a href="sensor/barometer" class="btn btn-success">Barometer->DB</a>
+   		
     </body>
 </html>
