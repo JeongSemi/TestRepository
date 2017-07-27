@@ -15,7 +15,14 @@
         <hr/>
    		
    		<h4>센서 데이터값 저장</h4>
-   		<a href="sensor/barometer" class="btn btn-success">Barometer->DB</a>
+   		<a href="sensor/temperature" class="btn btn-danger">온도</a>
+   		<a href="sensor/gas" class="btn btn-warning">가스</a>
+   		<a href="sensor/humidity" class="btn btn-success">습도</a>
+   		<a href="sensor/raindrop" class="btn btn-primary">빗물감지</a>
+   		<a href="sensor/pressure" class="btn btn-default">기압</a>
+   		<a href="sensor/photoresistor" class="btn btn-danger">조도</a>
+   		<a href="sensor/mercury" class="btn btn-warning">기울기</a>
+   		<a href="sensor/touch" class="btn btn-success">터치</a>
    		
     </body>
 </html>

@@ -20,16 +20,17 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.mycompany.myapp.dto.Barometer;
+import com.mycompany.myapp.dto.Gas;
+import com.mycompany.myapp.dto.Temperature;
 import com.mycompany.myapp.service.SensorService;
 
 @Component
-public class BarometerHandler extends TextWebSocketHandler {
-	private static final Logger LOGGER = LoggerFactory.getLogger(BarometerHandler.class);
+public class GasHandler extends TextWebSocketHandler {
+	private static final Logger LOGGER = LoggerFactory.getLogger(GasHandler.class);
 
 	@Autowired
 	private SensorService service;
-	
+
 	private List<WebSocketSession> list = new Vector<>();
 
 	private MqttClient mqttClient;
@@ -43,20 +44,20 @@ public class BarometerHandler extends TextWebSocketHandler {
 
 			@Override
 			public void messageArrived(String string, MqttMessage mm) throws Exception {
+				double gasValue;
 				String subJson = new String(mm.getPayload());
-				System.out.println("*BarometerHandler*messageArrived: " + subJson);
 				JSONObject jsonObject = new JSONObject(subJson);
-				double temperature = jsonObject.getDouble("temperature");
-//				double pressure = jsonObject.getDouble("pressure");
-				Barometer barometer = new Barometer();
-				barometer.setTemperature(temperature);
-				barometer.setPressure(1000);
-				
-						service.barometerDataIn(barometer);
-				
-				
-				for (WebSocketSession session : list) {
-					session.sendMessage(new TextMessage(subJson));
+				if ((jsonObject.getString("command")).equals("gas")) {
+					System.out.println("*GasHandler*messageArrived: " + subJson);
+					gasValue = jsonObject.getDouble("value");
+					Gas gas = new Gas();
+					gas.setGas(gasValue);
+					
+					service.gasDataIn(gas);
+
+					for (WebSocketSession session : list) {
+						session.sendMessage(new TextMessage(subJson));
+					}
 				}
 			}
 
@@ -71,7 +72,7 @@ public class BarometerHandler extends TextWebSocketHandler {
 		mqttClient.setCallback(mqttCallback);
 		mqttClient.connect();
 
-		mqttClient.subscribe("/devices/device1/temperature");
+		mqttClient.subscribe("/rc_sensing_robo/sensor");
 	}
 
 	@PreDestroy

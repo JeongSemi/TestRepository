@@ -40,7 +40,7 @@ public class MqttPublisher {
 		//MQTT 브로커로 보내는 메시지 생성
 		MqttMessage message = new MqttMessage(text.getBytes());
 		//지정한 토픽 MQTT 브로커로 메시지 보냄
-		mqttClient.publish("/devices/device1/temperature", message);
+		mqttClient.publish("/sensingrobo/send", message);
 	}
 
 	public void shutdown() throws MqttException {

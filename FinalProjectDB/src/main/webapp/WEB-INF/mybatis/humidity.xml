@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="humidity">
+	<insert id="insert" parameterType="com.mycompany.myapp.dto.Humidity">
+		<selectKey keyProperty="hno" resultType="int" order="AFTER"> <!-- 자동증가되는 컬럼 얻기 -->
+			select humidity_hno_seq.currval from dual <!-- from dual : 실제 테이블X 그냥 구색맞추기용 -->
+		</selectKey>
+			insert into humidity 
+			(hno, htime, humidity)
+			values (humidity_hno_seq.nextval, sysdate, #{humidity}) 
+	</insert>
+
+</mapper>
+  

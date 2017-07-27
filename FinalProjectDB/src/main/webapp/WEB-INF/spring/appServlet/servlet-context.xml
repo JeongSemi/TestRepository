@@ -36,6 +36,13 @@
 	
 	<!-- WebSocket -->
 	<websocket:handlers>
-		<websocket:mapping handler="barometerHandler" path="/websocket/barometer"/>	
+		<websocket:mapping handler="temperatureHandler" path="/websocket/temperature"/>	
+		<websocket:mapping handler="gasHandler" path="/websocket/gas"/>	
+		<websocket:mapping handler="humidityHandler" path="/websocket/humidity"/>	
+		<websocket:mapping handler="mercuryHandler" path="/websocket/mercury"/>	
+		<websocket:mapping handler="photoresistorHandler" path="/websocket/photoresistor"/>	
+		<websocket:mapping handler="pressureHandler" path="/websocket/pressure"/>	
+		<websocket:mapping handler="raindropHandler" path="/websocket/raindrop"/>	
+		<websocket:mapping handler="touchHandler" path="/websocket/touch"/>	
 	</websocket:handlers>
 </beans:beans>
