@@ -1,5 +1,7 @@
 package com.mycompany.myapp.service;
 
+import java.util.List;
+
 import com.mycompany.myapp.dto.Gas;
 import com.mycompany.myapp.dto.Humidity;
 import com.mycompany.myapp.dto.Pressure;
@@ -10,5 +12,6 @@ public interface SensorService {
 	public void gasDataIn(Gas gas);
 	public void pressureDataIn(Pressure pressure);
 	public void humidityDataIn(Humidity humidity);
+	public List<Humidity> humidityMinuteData();
 
 }

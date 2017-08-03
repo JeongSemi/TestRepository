@@ -13,6 +13,12 @@
 			(hno, htime, humidity)
 			values (humidity_hno_seq.nextval, sysdate, #{humidity}) 
 	</insert>
+	
+	<select id="selectByMinute" parameterType="map" resultType="com.mycompany.myapp.dto.Humidity">
+		select * from humidity 
+		where htime between TO_DATE(#{selectFromTime},'YYYYMMDDHH24MISS') 
+		and TO_DATE(#{selectToTime},'YYYYMMDDHH24MISS')
+	</select>
 
 </mapper>
   

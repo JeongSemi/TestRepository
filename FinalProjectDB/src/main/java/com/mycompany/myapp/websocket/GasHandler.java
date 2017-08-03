@@ -53,7 +53,7 @@ public class GasHandler extends TextWebSocketHandler {
 					Gas gas = new Gas();
 					gas.setGas(gasValue);
 					
-					service.gasDataIn(gas);
+//					service.gasDataIn(gas);
 
 					for (WebSocketSession session : list) {
 						session.sendMessage(new TextMessage(subJson));

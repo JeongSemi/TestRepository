@@ -1,5 +1,7 @@
 package com.mycompany.myapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,5 +35,11 @@ public class SensorServiceImpl implements SensorService {
 	@Override
 	public void humidityDataIn(Humidity humidity) {
 		dao.humidityInsert(humidity);
+	}
+	
+	@Override
+	public List<Humidity> humidityMinuteData() {
+		List<Humidity> list = dao.humiditySelectByMinute();
+		return list;
 	}
 }

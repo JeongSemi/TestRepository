@@ -1,5 +1,11 @@
 package com.mycompany.myapp.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,4 +62,22 @@ public class SensorDaoImpl implements SensorDao {
 		LOGGER.info("Humidity insert 성공");
 		return hno;
 	}
+
+	@Override
+	public List<Humidity> humiditySelectByMinute() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Date currDateTime = new Date();
+		String selectDate = new SimpleDateFormat("yyyyMMdd").format(currDateTime);
+		String selectFromTime = selectDate + "095800";
+		String selectToTime = selectDate + "095859";
+		System.out.println(selectDate);
+		map.put("selectFromTime", selectFromTime);
+		map.put("selectToTime", selectToTime);
+		List<Humidity> list = sqlSessionTemplate.selectList("humidity.selectByMinute", map);
+
+		LOGGER.info("SELECT By Second 성공");
+
+		return list;
+	}
+
 }

@@ -53,7 +53,7 @@ public class HumidityHandler extends TextWebSocketHandler {
 					Humidity humidity = new Humidity();
 					humidity.setHumidity(hum);
 
-					service.humidityDataIn(humidity);
+//					service.humidityDataIn(humidity);
 
 					for (WebSocketSession session : list) {
 						session.sendMessage(new TextMessage(subJson));

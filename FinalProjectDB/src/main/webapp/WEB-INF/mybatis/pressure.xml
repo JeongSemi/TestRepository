@@ -7,11 +7,11 @@
 <mapper namespace="pressure">
 	<insert id="insert" parameterType="com.mycompany.myapp.dto.Pressure">
 		<selectKey keyProperty="prno" resultType="int" order="AFTER"> <!-- 자동증가되는 컬럼 얻기 -->
-			select pressure_tno_seq.currval from dual <!-- from dual : 실제 테이블X 그냥 구색맞추기용 -->
+			select pressure_prno_seq.currval from dual <!-- from dual : 실제 테이블X 그냥 구색맞추기용 -->
 		</selectKey>
 			insert into pressure 
 			(prno, prtime, pressure)
-			values (pressure_tno_seq.nextval, sysdate, #{pressure}) 
+			values (pressure_prno_seq.nextval, sysdate, #{pressure}) 
 	</insert>
 
 </mapper>

@@ -53,7 +53,7 @@ public class PressureHandler extends TextWebSocketHandler {
 					Pressure pressure = new Pressure();
 					pressure.setPressure(pressureValue);
 
-					service.pressureDataIn(pressure);
+//					service.pressureDataIn(pressure);
 
 					for (WebSocketSession session : list) {
 						session.sendMessage(new TextMessage(subJson));

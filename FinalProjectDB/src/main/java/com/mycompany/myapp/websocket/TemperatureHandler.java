@@ -52,7 +52,7 @@ public class TemperatureHandler extends TextWebSocketHandler {
 					Temperature temperature = new Temperature();
 					temperature.setTemperature(temp);
 
-					service.temperatureDataIn(temperature);
+//					service.temperatureDataIn(temperature);
 
 					for (WebSocketSession session : list) {
 						session.sendMessage(new TextMessage(subJson));
